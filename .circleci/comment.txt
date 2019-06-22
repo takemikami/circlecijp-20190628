@@ -1,0 +1,4 @@
+[![appengine](https://img.shields.io/badge/appengine-default--${CIRCLE_PR_NUMBER}-brightgreen.svg)](https://${CIRCLE_PR_NUMBER}-dot-default-dot-${GOOGLE_PROJECT_ID}.appspot.com/) [![dashboard](https://img.shields.io/badge/dashboard-default--${CIRCLE_PR_NUMBER}-blue.svg)](https://console.cloud.google.com/appengine?hl=ja&project=${GOOGLE_PROJECT_ID}&serviceId=default&duration=PT1H&versionId=${CIRCLE_PR_NUMBER}) [![logging](https://img.shields.io/badge/logging-default--${CIRCLE_PR_NUMBER}-blue.svg)](https://console.cloud.google.com/logs/viewer?project=${GOOGLE_PROJECT_ID}&hl=ja&resource=gae_app%2Fmodule_id%2Fdefault%2Fversion_id%2F${CIRCLE_PR_NUMBER}&minLogLevel=0&expandAll=false)
+
+$REPORT_BADGES
+$ERROR_MESSAGES

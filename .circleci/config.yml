@@ -1,0 +1,41 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: takemikami/google-cloud-sdk-gae-java8
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            - v1-dependencies-
+      - run:
+          name: test
+          command: |
+            ./gradlew check
+      - run:
+          name: deploy
+          command: |
+            echo $GCLOUD_SERVICE_KEY | gcloud auth activate-service-account --key-file=-
+            export CIRCLE_BRANCH
+            export CIRCLE_PR_NUMBER="${CIRCLE_PR_NUMBER:-${CIRCLE_PULL_REQUEST##*/}}"
+            if [ "$CIRCLE_BRANCH" == "master" || "$CIRCLE_PR_NUMBER" != "" ]; then
+              ./gradlew appengineDeploy --stacktrace
+            fi
+      - save_cache:
+          paths:
+            - "~/.ivy2/cache"
+            - "~/.m2"
+            - "~/.gradle/"
+          key: v1-dependencies-{{ checksum "build.gradle" }}
+      - store_artifacts:
+          path: ~/repo/build/reports
+      - run:
+          name: report
+          when: always
+          command: |
+            apk add curl
+            apk add jq
+            apk add libxml2-utils
+            .circleci/report.sh
