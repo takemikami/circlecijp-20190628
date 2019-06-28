@@ -8,6 +8,8 @@ CircleCI ユーザーコミュニティミートアップ #5
 2019.06.28 @ ビズリーチ  
 https://circleci.connpass.com/event/134440/
 
+資料: CircleCIを使ったSpringBoot/GAEアプリ開発の効率化ノウハウ  
+https://www.slideshare.net/takemikami/circlecispringbootgae
 
 ## ローカル環境での実行
 
